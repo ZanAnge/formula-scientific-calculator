@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#292d31"><meta name="description" content="离线科学计算器：科学函数、复数运算与方程求解。">
+  <title>FORMULA · 科学计算器</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="solver.css?v=20261103-keypad">
+  <script src="engine.js?v=20261103-keypad" defer></script><script src="app.js?v=20261103-keypad" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="./index.html"><span class="logo-mark">ƒ</span> FORMULA<span class="version">V1.0</span></a><span class="local-badge"><i></i> 本地计算 · 离线可用</span></header>
+  <main>
+    <div class="intro"><div><span class="eyebrow">A LITTLE PRECISION, EVERY DAY</span><h1>让复杂，回归简单<span>。</span></h1><p>从日常运算到复数世界，专注每一次求解。</p></div><span class="intro-index">01 / SCIENTIFIC TOOLS</span></div>
+    <nav class="mode-tabs" aria-label="计算模式"><button class="active" data-mode="normal" aria-pressed="true"><span>⌗</span> 普通计算</button><button data-mode="complex" aria-pressed="false"><span>j</span> 复数计算</button><button data-mode="equation" aria-pressed="false"><span>ƒ</span> 方程求解</button></nav>
+    <a class="full-solve-link" href="solver.html">∫ 完整求解 · 部分分式与拉普拉斯推导 →</a>
+    <div class="workspace">
+      <section class="calculator" aria-label="科学计算器">
+        <div class="device-top"><div><strong>FORMULA</strong><span>SCIENTIFIC CALCULATOR</span></div><div class="solar" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+        <div id="calculation-panel">
+          <div class="screen"><div class="screen-status"><span><b id="screen-mode">COMP</b><b id="angle-indicator">DEG</b><b id="shift-indicator" hidden>SHIFT</b></span><span id="history-indicator">0 条记录</span></div>
+            <label class="sr-only" for="expression">数学表达式</label><input id="expression" type="text" autocomplete="off" spellcheck="false" placeholder="0" maxlength="1000" inputmode="text">
+            <div id="natural" class="natural" aria-hidden="true">准备好，开始一次计算</div>
+            <div class="result-line"><span>=</span><output id="result" aria-live="polite">0</output></div><div id="error" role="alert"></div>
+          </div>
+          <div class="screen-actions"><button id="angle-toggle" title="切换角度单位">DEG <span>⇄ RAD</span></button><button id="copy-result">▣ 复制结果</button></div>
+          <div class="utility-row"><button id="shift" aria-pressed="false">SHIFT</button><span id="key-hint">按 SHIFT 使用反三角函数</span><button id="history-toggle" aria-expanded="true">◷ 历史</button></div>
+          <div class="keys" id="keys">
+            <button data-insert="sin(" data-shift="asin(" class="science">sin</button><button data-insert="cos(" data-shift="acos(" class="science">cos</button><button data-insert="tan(" data-shift="atan(" class="science">tan</button><button data-insert="log(" class="science">log</button><button data-insert="ln(" class="science">ln</button><button data-insert="exp(" class="science">eˣ</button>
+            <button data-insert="^2" class="science">x²</button><button data-insert="^3" class="science">x³</button><button data-insert="^" class="science">xʸ</button><button data-insert="sqrt(" class="science">√</button><button data-insert="!" class="science">x!</button><button data-insert="/" class="science" title="分数：输入分子 ÷ 分母">a/b</button>
+            <button data-insert="(" class="science">(</button><button data-insert=")" class="science">)</button><button data-insert="π" class="science">π</button><button data-insert="e" class="science">e</button><button data-insert="%" class="science">%</button><button data-insert="j" class="science imaginary" title="虚数单位；自动切换复数模式">j</button>
+            <button data-insert="7" class="number">7</button><button data-insert="8" class="number">8</button><button data-insert="9" class="number">9</button><button data-action="delete" class="delete">DEL</button><button data-action="clear" class="clear span-two">AC</button>
+            <button data-insert="4" class="number">4</button><button data-insert="5" class="number">5</button><button data-insert="6" class="number">6</button><button data-insert="×" class="operator">×</button><button data-insert="÷" class="operator span-two">÷</button>
+            <button data-insert="1" class="number">1</button><button data-insert="2" class="number">2</button><button data-insert="3" class="number">3</button><button data-insert="+" class="operator">+</button><button data-insert="-" class="operator span-two">−</button>
+            <button data-insert="0" class="number">0</button><button data-insert="." class="number">.</button><button data-insert="Ans" class="operator">Ans</button><button data-action="equals" class="equals span-three">=</button>
+          </div>
+        </div>
+        <div id="equation-panel" hidden><div class="equation-heading"><span class="eyebrow">EQUATION MODE</span><h2>每个未知，都有答案。</h2><p>选择方程类型，输入实数系数。</p></div><label class="field-label" for="equation-kind">方程类型</label><select id="equation-kind"><option value="quadratic">一元二次方程</option><option value="linear">一元一次方程</option><option value="system">二元一次方程组</option></select><div id="equation-template"></div><form id="equation-form"><div id="coefficient-fields"></div><button class="solve-button" type="submit">求解方程 <span>→</span></button></form><div id="equation-result" aria-live="polite">填写系数后，点击求解。</div></div>
+        <div class="device-footer"><span>NATURAL EXPRESSION</span><span>LOCAL ENGINE / 01</span></div>
+      </section>
+      <aside class="side-panels">
+        <section class="info-card" id="context-card"><div class="card-label"><span id="context-label">计算小贴士</span><span>↗</span></div><div id="context-content"></div></section>
+        <section class="history-card" id="history-card"><div class="card-label"><span>历史记录 <small id="history-count">00</small></span><button id="clear-history">清空</button></div><div id="history-list"></div><div class="history-footer"><i></i> 自动保存在当前浏览器</div></section>
+        <div class="keyboard-tip"><span>⌨</span><p><b>让键盘跟上你的思路</b><br><kbd>Enter</kbd> 计算 <kbd>Esc</kbd> 清空 <kbd>⌫</kbd> 删除</p></div>
+      </aside>
+    </div>
+    <footer class="page-footer"><span>为思考留出空间。</span><span>原生构建 <b>·</b> 无需联网 <b>·</b> 数据留在本地</span></footer>
+  </main><div id="toast" role="status"></div>
+</body></html>

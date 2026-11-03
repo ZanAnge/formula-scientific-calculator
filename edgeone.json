@@ -1,0 +1,8 @@
+{
+  "headers": [
+    { "source": "/*.mjs", "headers": [{ "key": "Content-Type", "value": "text/javascript; charset=utf-8" }] },
+    { "source": "/vendor/pyodide/*.mjs", "headers": [{ "key": "Content-Type", "value": "text/javascript; charset=utf-8" }] },
+    { "source": "/vendor/pyodide/*.wasm", "headers": [{ "key": "Content-Type", "value": "application/wasm" }] },
+    { "source": "/vendor/*", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
+  ]
+}

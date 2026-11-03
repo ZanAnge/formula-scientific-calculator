@@ -1,0 +1,11 @@
+{
+  "name": "formula-scientific-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline native scientific calculator",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test tests/engine.test.cjs && python -m unittest discover -s tests -p test_symbolic.py && node --test tests/browser-runtime.test.mjs",
+    "test:browser": "node --test tests/browser-runtime.test.mjs"
+  }
+}
